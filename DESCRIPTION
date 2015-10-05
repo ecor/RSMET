@@ -1,0 +1,15 @@
+Package: RSMET
+Maintainer: Emanuele Cordano <emanuele.cordano@gmail.com>
+License: GPL (>= 2)
+Title: An R Plug-in to Get Real-Time Meteorological Data in SMET Format 
+Type: Package
+Author: Emanuele Cordano
+Description: MISSING
+Version: 0.1
+Date: 2015-09-18
+Repository: CRAN
+Depends:
+    stringr
+Imports: methods
+Suggests: ggmap
+URL: NA
