@@ -309,20 +309,13 @@ NULL
 #' 
 
 
-setMethod("as.smet","list",function(object,...) {
-			
-						out <- lapply(X=object,FUN=function(x,...){
-						
-						out <- RSMET::as.smet(x,...)
-					    return(out)
-						},...)
-				
-						return(out)
-			})
+setMethod("as.smet","list",function(object,...) {lapply(X=object,FUN=RSMET::as.smet,...)})
+					   
 
 
 	
-	NULL
+	
+NULL
 #'
 #' 
 #' @rdname as.smet
