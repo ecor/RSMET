@@ -20,9 +20,9 @@ as.smet(object, ...)
   header.fields = c("longitude", "latitude", "station_id", "altitude",
   "location"), variables = NULL, force.multistation = FALSE, ...)
 
-\S4method{as.smet}{smet}(object, ...)
-
 \S4method{as.smet}{list}(object, ...)
+
+\S4method{as.smet}{smet}(object, ...)
 }
 \arguments{
 \item{object}{the object to be coerced}
@@ -79,5 +79,9 @@ data <- data[,variables]
 attr(data,"header") <- header
 
 sm <- as.smet(data)
+
+# In case of multiple station, it return a list of SMET-class objects:
+
+sm_multi <- as.smet(meteofrance,variables=variables)
 }
 

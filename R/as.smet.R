@@ -46,6 +46,9 @@ NULL
 #' 
 #' sm <- as.smet(data)
 #' 
+#' # In case of multiple station, it return a list of SMET-class objects: 
+#' 
+#' sm_multi <- as.smet(meteofrance,variables=variables)
 #' 
 #' 
 #'   
@@ -151,23 +154,29 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 		header.fields <- header.fields[header.fields %in% names(object)]
 		names(header.fields) <- header.fields
 		
-		object <- split(object,object[,station.field])
+		
 		
 		if (!is.null(variables)) {
 			
 			variables <- variables[variables %in% names(object)]
+			print(c(header.fields,variables))
 			object <- object[,c(header.fields,variables)]
 			
+		} else {
+			
+			
+			variables <- names(object)[!(names(object) %in% header.filelds)]
 		}
-		
-		object <- lapply(X=object,FUN=function(x,header.fields) {
+		object <- split(object,object[,station.field])
+		object <- lapply(X=object,FUN=function(x,header.fields,variables) {
 					
-				out <- x	
+				out <- x[,variables]	
 				attr(out,"header") <- lapply(X=header.fields,FUN=function(i,x){x[1,i]},x=x)	
+				
 				
 				return(out)
 				
-			},header.fields=header.fields)	
+			},header.fields=header.fields,variables=variables)	
 		
 		
 		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,...)
@@ -286,24 +295,11 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	
 	
 })
-	
-NULL
-#'
-#' 
-#' @rdname as.smet
-#' @method as.smet smet
-#' @aliases as.smet 
-#' @export
-#' 
-#' 
-
-
-setMethod("as.smet","smet",function(object,...) { return(object)})
-			
 
 
 NULL
 #'
+#' 
 #' 
 #' @rdname as.smet
 #' @method as.smet list
@@ -313,10 +309,33 @@ NULL
 #' 
 
 
-setMethod("as.smet","list",function(object,...) { return(lapply(X=object,FUN=RSMET::as.smet,...))})
+setMethod("as.smet","list",function(object,...) {
+			
+						out <- lapply(X=object,FUN=function(x,...){
+						
+						out <- RSMET::as.smet(x,...)
+					    return(out)
+						},...)
+				
+						return(out)
+			})
 
 
-
+	
+	NULL
+#'
+#' 
+#' @rdname as.smet
+#' @method as.smet smet
+#' @aliases as.smet 
+#' @export
+#' 
+#' 
+	
+	
+	setMethod("as.smet","smet",function(object,...) { return(object)})
+	
+	
 
 
 
