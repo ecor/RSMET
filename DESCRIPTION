@@ -5,8 +5,8 @@ Title: An R Plug-in to Get Real-Time Meteorological Data in SMET Format
 Type: Package
 Author: Emanuele Cordano
 Description: MISSING
-Version: 0.1
-Date: 2015-09-18
+Version: 1.0
+Date: 2015-10-05
 Repository: CRAN
 Depends:
     stringr
