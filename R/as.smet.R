@@ -161,11 +161,11 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 			variables <- variables[variables %in% names(object)]
 			print(c(header.fields,variables))
 			object <- object[,c(header.fields,variables)]
-			
+			e
 		} else {
 			
 			
-			variables <- names(object)[!(names(object) %in% header.filelds)]
+			variables <- names(object)[!(names(object) %in% header.fields)]
 		}
 		object <- split(object,object[,station.field])
 		object <- lapply(X=object,FUN=function(x,header.fields,variables) {
