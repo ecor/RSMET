@@ -18,7 +18,8 @@ as.smet(object, ...)
 \S4method{as.smet}{data.frame}(object, mult = NA, offset = NA,
   date.field = "timestamp", station.field = "station_id",
   header.fields = c("longitude", "latitude", "station_id", "altitude",
-  "location"), variables = NULL, force.multistation = FALSE, ...)
+  "location"), variables = NULL, force.multistation = FALSE,
+  metaparam = attr(object, "metaparam"), ...)
 
 \S4method{as.smet}{list}(object, ...)
 
@@ -40,6 +41,8 @@ as.smet(object, ...)
 \item{variables}{(optional) selection of variables hich can be exported to SMET formats. It is used only in case of two or more stations.}
 
 \item{force.multistation}{logical value. If it is \code{TRUE} the method is forced to return a list of SMET objects even in case of only one station}
+
+\item{metaparam}{metedata optional data frame containig meta info on variables. It can be entered as an attribute of \code{object}. See the structure of \code{metaparam} of \code{\link{meteofrance}}.It must contains \code{SMET_ID},\code{SMET_UNIT_MULTIPLIER},\code{SMET_UNIT_OFFSET} columns/fields.}
 }
 \description{
 Coerces an object to a \code{smet-class}  object
@@ -77,6 +80,7 @@ metaparam <- metaparam[metaparam$SMET_ID \%in\% names(data),]
 header <- lapply(X=header,FUN=function(x,data) {data[1,x]},data=data)
 data <- data[,variables]
 attr(data,"header") <- header
+attr(data,"metaparam") <- metaparam
 
 sm <- as.smet(data)
 

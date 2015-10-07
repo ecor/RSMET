@@ -1,4 +1,7 @@
 NULL
+#### TO DO SISTEMRARE SMET_MULTIPLIER PER RH..
+
+
 
 #' Coerces an object to a \code{smet-class}  object
 #' 
@@ -8,7 +11,10 @@ NULL
 #' @param station.field field name used for station ID. Default is \code{"station_id"}, as used for \code{SMET} format. 
 #' @param header.fields names used for the SMET header. Defaults are \code{c("longitude","latitude","station_id" ,"altitude","location")}
 #' @param variables (optional) selection of variables hich can be exported to SMET formats. It is used only in case of two or more stations. 
+#' @param metaparam metedata optional data frame containig meta info on variables. It can be entered as an attribute of \code{object}. See the structure of \code{metaparam} of \code{\link{meteofrance}}.It must contains \code{SMET_ID},\code{SMET_UNIT_MULTIPLIER},\code{SMET_UNIT_OFFSET} columns/fields.
 #' @param force.multistation logical value. If it is \code{TRUE} the method is forced to return a list of SMET objects even in case of only one station 
+#' 
+#' 
 #' 
 #' @param ... further arguments
 #' 
@@ -43,6 +49,7 @@ NULL
 #' header <- lapply(X=header,FUN=function(x,data) {data[1,x]},data=data)
 #' data <- data[,variables]
 #' attr(data,"header") <- header
+#' attr(data,"metaparam") <- metaparam
 #' 
 #' sm <- as.smet(data)
 #' 
@@ -132,9 +139,11 @@ NULL
 #' 
 #' 
 
-setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="timestamp",station.field="station_id",header.fields=c("longitude","latitude","station_id" ,"altitude","location"),variables=NULL,force.multistation=FALSE,...) {
-	
+setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="timestamp",station.field="station_id",header.fields=c("longitude","latitude","station_id" ,"altitude","location"),variables=NULL,force.multistation=FALSE,
+				metaparam=attr(object,"metaparam"),...) {
+		
 			
+		
 	############ MULTISTATION OPTION 
 	multistation <- FALSE
 	if (is.null(station.field)) station.field <- NA
@@ -161,7 +170,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 			variables <- variables[variables %in% names(object)]
 			print(c(header.fields,variables))
 			object <- object[,c(header.fields,variables)]
-			e
+			
 		} else {
 			
 			
@@ -178,8 +187,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 				
 			},header.fields=header.fields,variables=variables)	
 		
-		
-		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,...)
+		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,...)
 		
 		return(out)
 		
@@ -187,6 +195,8 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	
 	
 	############   END MULTISTATION OPTION  20151005 
+	
+	
 	signature <- attr(object,"signature")
 	header <- attr(object,"header")
    
@@ -235,20 +245,36 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    names(out@header$units_offset) <- out@header$fields
    
    
+   
+  ##### NOT CORRECT!!! 
+   
    if (!is.na(mult)) {
 	   
-	   out@data[,names(mult)]  <- t(apply(X= out@data[,names(mult)],FUN=function(x,mult) {x/mult},mult=mult,MARGIN=1))
+	#   out@data[,names(mult)]  <- t(apply(X= out@data[,names(mult)],FUN=function(x,mult) {x/mult},mult=mult,MARGIN=1))
 	   
 	   out@header$units_multpier[names(mult)] <- mult
    }  
    
    if (!is.na(offset)) {
 	   
-	   out@data[,names(offset)]  <- t(apply(X= out@data[,names(offset)],FUN=function(x,mult) {x-offset},offset=offset,MARGIN=1))
+	 #  out@data[,names(offset)]  <- t(apply(X= out@data[,names(offset)],FUN=function(x,mult) {x-offset},offset=offset,MARGIN=1))
 	   
 	   out@header$units_offset[names(offset)] <- offset
    } 
-	 
+	
+   print("metaparam:")
+   str(metaparam)
+   
+   if (!is.null(metaparam)) {
+	   
+	   ids <- which(metaparam$SMET_ID %in% out@header$fields) 
+	   out@header$units_multpier[metaparam$SMET_ID[ids]] <- metaparam$SMET_UNIT_MULTIPLIER[ids]
+	   out@header$units_offset[metaparam$SMET_ID[ids]] <- metaparam$SMET_UNIT_OFFSET[ids]
+	   
+	   
+	   
+   }
+   
    tt <- out@data[1,date.field]
    tzv <- round(as.numeric(as.POSIXlt(as.character(tt),tz="GMT")-tt,units="hours")/0.5)*0.5
    
