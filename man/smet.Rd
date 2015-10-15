@@ -6,7 +6,8 @@
 \usage{
 smet(file = NULL, numeric = TRUE, non_numeric_fields = NULL,
   timezone.offset.sign = c("negative", "positive", "-", "+"),
-  date.field = "timestamp", date.format = "\%Y-\%m-\%dT\%H:\%M:\%S", ...)
+  date.field = "timestamp", date.format = "\%Y-\%m-\%dT\%H:\%M:\%S",
+  comment = "#", ...)
 }
 \arguments{
 \item{file}{SMET file name}
@@ -20,6 +21,8 @@ smet(file = NULL, numeric = TRUE, non_numeric_fields = NULL,
 \item{date.field}{field neme used for date and time. Default is \code{"timestamp"}.}
 
 \item{date.format}{format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.}
+
+\item{comment}{character symbol used to comment lines or part of lines. Default is \code{"#"}. See \code{\link{str_locate}}}
 
 \item{...}{further arguments}
 }

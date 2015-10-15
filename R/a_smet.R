@@ -15,7 +15,9 @@ NULL
 #############{A \code{"GPCA"} S3 object containing the parameters of the Multi-variate Gaussianization of the residuals of the VAR model contained in the \code{VAR} slot; it is \code{NULL} if no Gaussiatization of residuals is applied.
 
 #'     \item{\code{data}:}{S3 Object of class \code{"data.frame"} containing the weather data values. Date field is often alled \code{"timestamp"} and written in \code{\link{POSIXlt}} format. }
-#' }
+#'
+#' 	   \item{\code{file}:}{full name of the SMET file. If it is missing, it is \code{NA}.}
+#'  }
 #' 
 #' Detailed information about SMET format is reminded to \url{http://models.slf.ch/docserver/meteoio/SMET_specifications.pdf}.
 #' 
@@ -47,7 +49,7 @@ NULL
 #' as.smet("test")
 #' 
 
-setClass("smet",representation(signature="character",header="list",data="data.frame"))
+setClass("smet",representation(signature="character",header="list",data="data.frame",file="character"))
 
 
 

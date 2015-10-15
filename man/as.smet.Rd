@@ -19,7 +19,7 @@ as.smet(object, ...)
   date.field = "timestamp", station.field = "station_id",
   header.fields = c("longitude", "latitude", "station_id", "altitude",
   "location"), variables = NULL, force.multistation = FALSE,
-  metaparam = attr(object, "metaparam"), ...)
+  metaparam = attr(object, "metaparam"), file = NA, ...)
 
 \S4method{as.smet}{list}(object, ...)
 
@@ -43,6 +43,8 @@ as.smet(object, ...)
 \item{force.multistation}{logical value. If it is \code{TRUE} the method is forced to return a list of SMET objects even in case of only one station}
 
 \item{metaparam}{metedata optional data frame containig meta info on variables. It can be entered as an attribute of \code{object}. See the structure of \code{metaparam} of \code{\link{meteofrance}}.It must contains \code{SMET_ID},\code{SMET_UNIT_MULTIPLIER},\code{SMET_UNIT_OFFSET} columns/fields.}
+
+\item{file}{full filename of the reference SMET filename (not considered when \code{object} is \code{character} .}
 }
 \description{
 Coerces an object to a \code{smet-class}  object

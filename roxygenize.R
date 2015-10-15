@@ -1,3 +1,5 @@
+#! /usr/bin/Rscript
+
 # file roxigenize.R
 #
 # This file roxygenizes all documentation wriiten in "Roxygen" format.

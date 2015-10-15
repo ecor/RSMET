@@ -21,7 +21,7 @@
 
 \item{date.format}{format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.}
 
-\item{file}{filename where to print the \code{smat-class} object \code{x} as an ASCII file.}
+\item{file}{filename where to print the \code{smet-class} object \code{x} as an ASCII file. It is equal to \code{"internal"}, the filename is taken from \code{slot(x,"file")} (internally defined in \code{x}).}
 
 \item{print.all}{logical value. If it is \code{FALSE} exceeding lines are omitted for a better human readibility.}
 
@@ -40,6 +40,6 @@ sm <- smet(file)
 print(sm)
 }
 \seealso{
-\code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}}
+\code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}},\code{\link{print.meteoioini}}
 }
 

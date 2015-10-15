@@ -13,7 +13,7 @@ NULL
 #' @param variables (optional) selection of variables hich can be exported to SMET formats. It is used only in case of two or more stations. 
 #' @param metaparam metedata optional data frame containig meta info on variables. It can be entered as an attribute of \code{object}. See the structure of \code{metaparam} of \code{\link{meteofrance}}.It must contains \code{SMET_ID},\code{SMET_UNIT_MULTIPLIER},\code{SMET_UNIT_OFFSET} columns/fields.
 #' @param force.multistation logical value. If it is \code{TRUE} the method is forced to return a list of SMET objects even in case of only one station 
-#' 
+#' @param file full filename of the reference SMET filename (not considered when \code{object} is \code{character} .
 #' 
 #' 
 #' @param ... further arguments
@@ -140,7 +140,7 @@ NULL
 #' 
 
 setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="timestamp",station.field="station_id",header.fields=c("longitude","latitude","station_id" ,"altitude","location"),variables=NULL,force.multistation=FALSE,
-				metaparam=attr(object,"metaparam"),...) {
+				metaparam=attr(object,"metaparam"),file=NA,...) {
 		
 			
 		
@@ -187,7 +187,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 				
 			},header.fields=header.fields,variables=variables)	
 		
-		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,...)
+		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,file=NA,...)
 		
 		return(out)
 		
@@ -313,6 +313,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
   
    out@header$tz <- tz
    
+   out@file <- as.character(file)
 	
 	
 	
@@ -352,7 +353,21 @@ NULL
 #' 
 	
 	
-	setMethod("as.smet","smet",function(object,...) { return(object)})
+	setMethod("as.smet","smet",function(object,...) { 
+				
+				
+				args <- list(...)
+				slotnames <- names(getSlots("smet"))
+				
+				slotnames <- slotnames[slotnames %in% names(args)]
+				
+				for (it in slotnames) {
+					
+					slot(object,it) <- args[[it]]
+				}
+				
+				
+				return(object)})
 	
 	
 

@@ -4,7 +4,7 @@ NULL
 #' @param x,object a \code{smet-class} object
 #' @param date.field field neme used for date and time. Default is \code{"timestamp"}.
 #' @param date.format format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.
-#' @param file filename where to print the \code{smat-class} object \code{x} as an ASCII file. 
+#' @param file filename where to print the \code{smet-class} object \code{x} as an ASCII file. It is equal to \code{"internal"}, the filename is taken from \code{slot(x,"file")} (internally defined in \code{x}).
 #' @param print.all logical value. If it is \code{FALSE} exceeding lines are omitted for a better human readibility. 
 #' @param max.records maximum printable number of records. Default is 20 and it is activated only if \code{print.all==FALSE}. ,
 #' @param ... further argumnents for \code{writeLines}
@@ -17,7 +17,7 @@ NULL
 #' 
 #' @export 
 #' 
-#' @seealso \code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}}
+#' @seealso \code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}},\code{\link{print.meteoioini}}
 #' 
 #' @examples 
 #' 
@@ -38,7 +38,20 @@ print.smet <- function(x,
 	
 	x@data <- x@data[,x@header$fields]
 	
+	if (!is.null(file)) {
+		
+		if (file=="internal") {
+			
+			file <- x@file
+			
+		}
+		
+	}
 	
+	if (!is.null(file)) {
+		
+		if (is.na(file)) file <- NULL
+	}
 	if (date.field %in% names(x@data)) {
 	
 		x@data[,date.field] <- as.character(x@data[,date.field],format=date.format)
@@ -73,14 +86,18 @@ print.smet <- function(x,
 		
 		base::writeLines(out,...)
 		
+		
+		
 	} else {
 		
 		
 		base::writeLines(out,con=file,...)
+		x@file <- as.character(file)
+		
 	}
 	
 	
-	
+	return(x)
 
 
 	

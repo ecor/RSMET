@@ -9,6 +9,7 @@ NULL
 #' @param date.field field neme used for date and time. Default is \code{"timestamp"}.
 #' @param date.format format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.
 #' @param non_numeric_fields fields, except \code{date.fiels}, that contain non-numeric values
+#' @param comment character symbol used to comment lines or part of lines. Default is \code{"#"}. See \code{\link{str_locate}}
 #' @param ... further arguments
 #' 
 #' @export
@@ -30,16 +31,22 @@ NULL
 smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 		timezone.offset.sign=c("negative","positive","-","+"),
 		date.field="timestamp",
-		date.format="%Y-%m-%dT%H:%M:%S",
+		date.format="%Y-%m-%dT%H:%M:%S",comment="#",
 		...) {
 	
 	
 	
 	
+	file_default <- system.file("examples/test.smet",package="RSMET")
 	
-	if (is.null(file)){
+	
+	
+	
+	if (is.null(file)) file <- NA
+	if (is.na(file)){
 		
-		file <- system.file("examples/test.smet",package="RSMET")
+		
+		file <- file_default
 		warning("file is missing, and automatically set by default!")
 		
 	}
@@ -47,6 +54,19 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	
 	
 	string <- readLines(file,encoding="US-ASCII")
+	
+	#####
+	
+	sl <- stringr::str_length(string)
+	sla <- stringr::str_locate(string,comment)[,"start"]-1
+	sla[is.na(sla)] <- sl[is.na(sla)]
+	string <- stringr::str_sub(string,0,sla)
+	string <- string[string!=""]
+	
+	#####
+	
+	
+	
 	iheader <- which(string=="[HEADER]")
 	idata <- which(string=="[DATA]")
 	
@@ -193,8 +213,11 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 		}
 	}
 	
+	if (is.null(file)) file <- NA
+	if (identical(file,file_default)) file <- NA
 	
-	out <- new("smet",signature=signature,header=header,data=data)
+	out <- new("smet",signature=signature,header=header,data=data,file=as.character(file))
+	
 	
 	
 	
