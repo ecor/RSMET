@@ -35,6 +35,6 @@ Coerces an object to a \code{meteoioini-class}  object
 
 }
 \examples{
-# NO EXAMPLES AT THE MOMENT
+ini <- as.meteoioini("test")
 }
 

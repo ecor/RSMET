@@ -1,27 +1,44 @@
 NULL
-#' Put SMET object file into a \code{meteoini-class}
+#' Pushes SMET object file into a \code{\link{meteoioini-class}} object
 #' 
 #' @param ... \code{\link{smet-class}} objects
 #' @param smetlist (alternative) list of \code{\link{smet-class}} objects
 #' @param ini a \code{\link{meteoioini-class}} object  
-#' @param smetwdir .....
+#' @param smetwdir  optional working directory used for SMET writing on disks. Default is the package internal directory \code{system.file("temp",package="RSMET")}.
+#' @param force.smetdir logical value. In case it is \code{TRUE} the SMETs are written on \code{smetwdir} directory, otherwise thay can be written on \code{slot(ini,"Input")$METEOPAH} directory if specified.
+#' @param new.ini.file character string. DEfault is \code{NA}. If it is specified, the returned \code{\link{meteoioini-class}} object is saved as the \code{new.ini.file} file. 
+#' @param append logical value. Default is code{FALSE}. If it is \code{TRUE} SMETs will be appended to the pre-existing ones. If it is \code{TRUE}, \code{force.smetdir} and \code{smetwdir} arguments will be ingored.
 #' 
-#' 
+#' @return An updated \code{\link{meteoioini-class}} object.
 #' 
 #' @export 
 #' 
 #' @examples
 #' 
+#' ini <- as.meteoioini("test")
+#' 
+#' AA <- as.smet("test")
+#' BB <- as.smet("test")
+#' 
+#' 
+#' newini <- pushSmetIntoIni(AA,BB,ini=ini)
+#' newini <- pushSmetIntoIni(AA=AA,BB=BB,ini=ini)
+#' newini <- pushSmetIntoIni(AA=AA,BB=BB,ini=ini)
+#' 
+#' 
+#' 
+#' 
 #' ##  NOT YET IMPLEMENTED
 #' 
 
 
-putSmetIntoIni <- function(...,
+pushSmetIntoIni <- function(...,
 		smetlist=NULL,
 		ini=as.meteoioini("test"),
 		smetwdir=system.file("temp",package="RSMET"),
 		force.smetdir=TRUE,
-		new.ini.file=NA) {
+		new.ini.file=NA,
+		append=FALSE) {
 			
 			
 	
@@ -53,11 +70,11 @@ putSmetIntoIni <- function(...,
 			if (cond==FALSE) {
 				
 				message("No METEO key value specified, automatically set as SMET")
-				input$METEO <- SMET
+				input$METEO <- "SMET"
 			} 
 			if (!identical(input$METEO,"SMET")) {
 				
-				massage("METEO key value forced to SMET!")
+				message("METEO key value forced to SMET!")
 				input$SMET <- "SMET"
 				
 				
@@ -66,15 +83,26 @@ putSmetIntoIni <- function(...,
 			
 			if (append==TRUE) smetwdir <- input$METEOPATH
 			
-			cond <-  !is.null(input$METEOPATH)
+			cond <-  !is.null(input$METEOPATH) 
 			if (cond==FALSE) {
 				
 				message("No METEOPATH key value specified, automatically set as smetwdir argument")
 				input$METEOPATH <- smetwdir
 			} 
+			
+			if (force.smetdir==TRUE) {
+				
+				input$METEOPATH <- smetwdir
+				
+				if (append==TRUE) {
+						append=FALSE
+					    warning("Forcing SMET directory, append switched to FALSE!")
+					}
+				
+			}
 			if (!identical(input$METEO,"SMET")) {
 				
-				massage("METEO key value forced to smetwdir argument!")
+				message("METEO key value forced to smetwdir argument!")
 				input$SMET <- smetwdir
 				
 				
@@ -95,7 +123,7 @@ putSmetIntoIni <- function(...,
 			
 			newstation_keys <- paste("STATION",start+1:length(smetlist),sep="")
 			
-			if (is.null(names(smetlist))) names(smatlist) <- newstation_keys
+			if (is.null(names(smetlist))) names(smetlist) <- newstation_keys
 			
 			names(newstation_keys) <- names(smetlist)
 			
@@ -108,10 +136,11 @@ putSmetIntoIni <- function(...,
 				
 			}
 			
-			lapply(X=smatfiles,FUN=RSMET::print,file="internal")
+			
+			lapply(X=smetlist,FUN=print,file="internal")
 			
 			
-			out <- as.meteoioini(out,Input=input,file=as.character(new.ini.file))
+			out <- RSMET::as.meteoioini(out,Input=input,file=as.character(new.ini.file))
 			
 			
 			

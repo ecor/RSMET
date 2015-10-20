@@ -13,7 +13,14 @@ NULL
 #' @export
 #' 
 #' @examples 
-#' # NO EXAMPLES AT THE MOMENT
+#' 
+#' ini <- as.meteoioini("test")
+#'  
+#' 
+#' 
+
+
+
 
 
 as.meteoioini <- function (object=NULL,...)  {
@@ -115,7 +122,8 @@ NULL
 				
 				
 				args <- list(...)
-				slotnames <- names(getSlots("smet"))
+				
+				slotnames <- names(getSlots("meteoioini"))
 				
 				slotnames <- slotnames[slotnames %in% names(args)]
 				
