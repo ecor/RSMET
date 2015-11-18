@@ -48,7 +48,7 @@ collapse.smet <- function (x,y,headers=NULL) {
 	out <- x 
 	
 	out@data <- rbind(x@data,y@data)
-	
+	out@file <- as.character(NA)
 	#######
 	
 	
