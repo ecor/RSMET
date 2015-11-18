@@ -47,6 +47,11 @@ pushSmetIntoIni <- function(...,
 				
 				smetlist <- list(...)
 				
+				if (is.null(names(smetlist))) {
+					
+					names(smetlist) <- sapply(X=smetlist,FUN=function(x){x@header$station_id})
+				}
+				
 				if (is.null(ini)) {
 					
 					

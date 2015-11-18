@@ -187,7 +187,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 				
 			},header.fields=header.fields,variables=variables)	
 		
-		out <- lapply(X=object,FUN=RSMET::as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,file=NA,...)
+		out <- lapply(X=object,FUN=as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,file=NA,...)
 		
 		return(out)
 		
@@ -231,6 +231,9 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    if (!is.null(signature)) out@signature <- signature
    
    object[is.na(object)] <- out@header$nodata
+   
+   
+   
    
    out@data <- object
    
@@ -315,7 +318,26 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    
    out@file <- as.character(file)
 	
+	#### SORTING DATA  ### EC 20151104
 	
+	if (date.field %in% names(out@data)) {
+		
+		
+		row.names(out@data) <- sprintf("%09d",1:nrow(out@data))
+		times <- out@data[,date.field]
+		names(times) <- row.names(out@data)
+		
+		out@data <- out@data[names(sort(times)),]
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	#####
 	
 	
 	return(out)
