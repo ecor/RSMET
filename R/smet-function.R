@@ -10,6 +10,7 @@ NULL
 #' @param date.format format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.
 #' @param non_numeric_fields fields, except \code{date.fiels}, that contain non-numeric values
 #' @param comment character symbol used to comment lines or part of lines. Default is \code{"#"}. See \code{\link{str_locate}}
+#' @param station.field field name used for station ID. Default is \code{"station_id"}, as used for \code{SMET} format.
 #' @param ... further arguments
 #' 
 #' @export
@@ -31,7 +32,7 @@ NULL
 smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 		timezone.offset.sign=c("negative","positive","-","+"),
 		date.field="timestamp",
-		date.format="%Y-%m-%dT%H:%M:%S",comment="#",
+		date.format="%Y-%m-%dT%H:%M:%S",comment="#",station.field="station_id",
 		...) {
 	
 	
@@ -73,8 +74,7 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	signature <- paste(string[1:(iheader-1)],collapse=";")
 	
 	outdata <- stringr::str_split(string[-(1:idata)]," ")
-	
-	
+	outdata <- lapply(X=outdata,FUN=function(x){ x[x!=""]}) ## ec 20151118
 	
 	outdata <- t(as.data.frame(outdata,stringsAsFactors=FALSE))
 	data <- as.data.frame(outdata,stringsAsFactors=FALSE)
@@ -245,6 +245,15 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	
 	if (is.null(file)) file <- NA
 	if (identical(file,file_default)) file <- NA
+	
+	if (station.field %in% names(header)) {
+		
+		station_id <- header[[station.field]][1]
+		
+		station_id <- str_replace(station_id," ","")
+		
+		header[[station.field]] <- station_id
+	}
 	
 	out <- new("smet",signature=signature,header=header,data=data,file=as.character(file))
 	

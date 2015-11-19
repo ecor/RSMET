@@ -101,7 +101,7 @@ NULL
 #' 
 
 
-setMethod("as.meteoioini","list",function(object,...) {lapply(X=object,FUN=RSMET::as.meteoioini,...)})
+setMethod("as.meteoioini","list",function(object,...) {base::lapply(X=object,FUN=RSMET::as.meteoioini,...)})
 					   
 
 
@@ -121,7 +121,7 @@ NULL
 	setMethod("as.meteoioini","meteoioini",function(object,...) { 
 				
 				
-				args <- list(...)
+				args <- base::list(...)
 				
 				slotnames <- names(getSlots("meteoioini"))
 				

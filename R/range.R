@@ -15,7 +15,7 @@ NULL
 
 range.smet <- function(x,...,field="timestamp") {
 	
-	out <- range(x@data[,field],...)
+	out <- base::range(x@data[,field],...)
 	
 	return(out)
 	

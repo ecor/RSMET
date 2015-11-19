@@ -177,17 +177,17 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 			variables <- names(object)[!(names(object) %in% header.fields)]
 		}
 		object <- split(object,object[,station.field])
-		object <- lapply(X=object,FUN=function(x,header.fields,variables) {
+		object <- base::lapply(X=object,FUN=function(x,header.fields,variables) {
 					
 				out <- x[,variables]	
-				attr(out,"header") <- lapply(X=header.fields,FUN=function(i,x){x[1,i]},x=x)	
+				attr(out,"header") <- base::lapply(X=header.fields,FUN=function(i,x){x[1,i]},x=x)	
 				
 				
 				return(out)
 				
 			},header.fields=header.fields,variables=variables)	
 		
-		out <- lapply(X=object,FUN=as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,file=NA,...)
+		out <- base::lapply(X=object,FUN=as.smet,mult=mult,offset=offset,date.field=date.field,station.field=station.field,header.fields=header.fields,metaparam=metaparam,file=NA,...)
 		
 		return(out)
 		
@@ -358,7 +358,7 @@ NULL
 #' 
 
 
-setMethod("as.smet","list",function(object,...) {lapply(X=object,FUN=RSMET::as.smet,...)})
+setMethod("as.smet","list",function(object,...) {base::lapply(X=object,FUN=RSMET::as.smet,...)})
 					   
 
 
@@ -378,7 +378,7 @@ NULL
 	setMethod("as.smet","smet",function(object,...) { 
 				
 				
-				args <- list(...)
+				args <- base::list(...)
 				slotnames <- names(getSlots("smet"))
 				
 				slotnames <- slotnames[slotnames %in% names(args)]

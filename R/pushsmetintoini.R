@@ -45,7 +45,7 @@ pushSmetIntoIni <- function(...,
 			if (is.null(smetlist)) {
 				
 				
-				smetlist <- list(...)
+				smetlist <- base::list(...)
 				
 				if (is.null(names(smetlist))) {
 					

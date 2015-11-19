@@ -7,7 +7,7 @@
 smet(file = NULL, numeric = TRUE, non_numeric_fields = NULL,
   timezone.offset.sign = c("negative", "positive", "-", "+"),
   date.field = "timestamp", date.format = "\%Y-\%m-\%dT\%H:\%M:\%S",
-  comment = "#", ...)
+  comment = "#", station.field = "station_id", ...)
 }
 \arguments{
 \item{file}{SMET file name}
@@ -23,6 +23,8 @@ smet(file = NULL, numeric = TRUE, non_numeric_fields = NULL,
 \item{date.format}{format used for date and time. Default is \code{"\%Y-\%m-\%dT\%H:\%M:\%S"}.}
 
 \item{comment}{character symbol used to comment lines or part of lines. Default is \code{"#"}. See \code{\link{str_locate}}}
+
+\item{station.field}{field name used for station ID. Default is \code{"station_id"}, as used for \code{SMET} format.}
 
 \item{...}{further arguments}
 }
