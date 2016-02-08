@@ -4,7 +4,7 @@
 \alias{collapse.smet}
 \title{Coerces a \code{smet-class} object to a data frame}
 \usage{
-collapse.smet(x, y, headers = NULL)
+collapse.smet(x, y, headers = NULL, date.field = "timestamp")
 }
 \arguments{
 \item{x}{first \code{\link{smet-class}} object}
@@ -24,5 +24,7 @@ smet1 <- as.smet(system.file("examples/zugspitze1.smet",package="RSMET"))
 smet2 <- as.smet(system.file("examples/zugspitze2.smet",package="RSMET"))
 
 newsmet <- collapse.smet(x=smet1,y=smet2)
+
+newsmet_ <- collapse.smet(x=smet2,y=smet1)
 }
 

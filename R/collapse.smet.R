@@ -17,11 +17,11 @@ NULL
 #' 
 #' newsmet <- collapse.smet(x=smet1,y=smet2)
 #' 
-#' 
+#' newsmet_ <- collapse.smet(x=smet2,y=smet1)
 #' 
 #' 
 
-collapse.smet <- function (x,y,headers=NULL) {
+collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
 	x <- as.smet(x) ## x and y must be smet!
 	y <- as.smet(y)
@@ -47,7 +47,12 @@ collapse.smet <- function (x,y,headers=NULL) {
 	
 	out <- x 
 	
-	out@data <- rbind(x@data,y@data)
+	dd <- rbind(x@data,y@data)
+	
+	dd <- dd[order(dd[,date.field]),]
+	dd <- dd[which(!duplicated(dd[,date.field])),]
+	out@data <- dd
+	
 	out@file <- as.character(NA)
 	#######
 	
