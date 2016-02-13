@@ -7,6 +7,7 @@ NULL
 #' @param x first \code{\link{smet-class}} object 
 #' @param y second \code{\link{smet-class}} object 
 #' @param headers header attributes to  check before collapsing 
+#' @param date.field   field name used for date and time. Default is \code{"timestamp"}, as used for \code{SMET} format. 
 #' @export
 #'
 #' @return a collapsed \code{\link{smet-class}} object

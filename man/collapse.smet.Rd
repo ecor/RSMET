@@ -12,6 +12,8 @@ collapse.smet(x, y, headers = NULL, date.field = "timestamp")
 \item{y}{second \code{\link{smet-class}} object}
 
 \item{headers}{header attributes to  check before collapsing}
+
+\item{date.field}{field name used for date and time. Default is \code{"timestamp"}, as used for \code{SMET} format.}
 }
 \value{
 a collapsed \code{\link{smet-class}} object

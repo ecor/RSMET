@@ -168,7 +168,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 		if (!is.null(variables)) {
 			
 			variables <- variables[variables %in% names(object)]
-			print(c(header.fields,variables))
+		##	print(c(header.fields,variables))
 			object <- object[,c(header.fields,variables)]
 			
 		} else {
@@ -265,8 +265,8 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	   out@header$units_offset[names(offset)] <- offset
    } 
 	
-   print("metaparam:")
-   str(metaparam)
+   #print("metaparam:")
+   #str(metaparam)
    
    if (!is.null(metaparam)) {
 	   
