@@ -43,7 +43,26 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
 	if (!identical(header_values_x,header_values_y)) {
 		
-		warning("Collapsing SMET : header mismatch!!!")
+		s <- list()
+		mx <- list()
+		my <- list()
+		cwarn <- list()
+		for (it in headers) {
+			mx[[it]] <- str_trim(paste(header_values_x[[it]],collapse=" "))
+			my[[it]] <- str_trim(paste(header_values_y[[it]],collapse=" "))
+			s[[it]] <- sprintf("%s: %s == %s",it,mx[[it]],my[[it]]) ###%(header_values_x)
+			cwarn[[it]] <- (mx[[it]]!=my[[it]])
+
+		}
+
+		iw <- which(unlist(cwarn))
+		if (length(iw)>=1) { 
+			iw <- unique(c(iw,which(headers=="station_id")))
+		    m <- c("Collapsing SMET : header mismatch!!!",unlist(s[iw]))
+		    m <- paste(m,sep="   ")
+		
+			warning(m)
+		}
 	}
 	
 	out <- x 
