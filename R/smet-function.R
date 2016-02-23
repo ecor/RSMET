@@ -81,7 +81,7 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	rownames(data) <- NULL
 	
 	#### Create a list for the header
-    outheader <- stringr::str_split(string[(iheader+1):(idata-1)],"=")                                                             
+    outheader <- stringr::str_split(string[(iheader+1):(idata-1)],"=",n=2)                                                             
 	header <- lapply(X=outheader,FUN=function(x){x[2]})
 	names(header) <- sapply(X=outheader,FUN=function(x){x[1]})
 	names(header) <- stringr::str_replace_all(names(header)," ","")

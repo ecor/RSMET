@@ -59,7 +59,7 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 		if (length(iw)>=1) { 
 			iw <- unique(c(iw,which(headers=="station_id")))
 		    m <- c("Collapsing SMET : header mismatch!!!",unlist(s[iw]))
-		    m <- paste(m,sep="   ")
+		    m <- paste(m,collapse="   ")
 		
 			warning(m)
 		}
@@ -67,10 +67,46 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
 	out <- x 
 	
+
+	xcd <- which(names(x@data)==date.field)
+	ycd <- which(names(y@data)==date.field)
+	
+	x@data[,xcd] <- as.POSIXct(x@data[,xcd])
+	y@data[,ycd] <- as.POSIXct(y@data[,ycd])
+	## 
+	##
 	dd <- rbind(x@data,y@data)
 	
+	rownames(dd) <- NULL
+	
+	dc <- which(names(dd)==date.field)
+	
 	dd <- dd[order(dd[,date.field]),]
-	dd <- dd[which(!duplicated(dd[,date.field])),]
+	uniq <- which(!duplicated(dd[,date.field]))
+	
+	nonuniq <- which(duplicated(dd[,date.field]))
+	
+	nonuniq_prev <- nonuniq-1
+	
+	cond <- array(FALSE,length(nonuniq))
+	
+	if (length(nonuniq)>=1) for (i in 1:length(nonuniq)) {
+		print(i)
+		prev <- as.vector(dd[nonuniq_prev[i],])
+		v <- as.vector(dd[nonuniq[i],])
+	
+		cond[i] <- all(prev==v)
+		
+		
+	}
+	
+	
+	
+	toprint <- which((1:nrow(dd)) %in% c(uniq,nonuniq[cond==FALSE]))
+
+	
+	dd <- dd[toprint,]
+	
 	out@data <- dd
 	
 	out@file <- as.character(NA)
