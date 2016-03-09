@@ -1,5 +1,7 @@
 NULL
-#' "Print" and "Show" method for "smet-class" object 
+#' @title "Print" and "Show" method for "smet-class" object 
+#' 
+#' @description It prints or shows a \code{smet-class} directly on terminal or on an external file.
 #' 
 #' @param x,object a \code{smet-class} object
 #' @param date.field field neme used for date and time. Default is \code{"timestamp"}.
@@ -107,6 +109,7 @@ print.smet <- function(x,
 
 NULL
 #'
+#' @title show
 #' @rdname print
 #' @method show smet
 #' @aliases show

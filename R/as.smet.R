@@ -1,9 +1,10 @@
 NULL
-#### TO DO SISTEMRARE SMET_MULTIPLIER PER RH..
 
-
-
-#' Coerces an object to a \code{smet-class}  object
+#' @title Coerces an object to a \code{smet-class}  object
+#' 
+#' @description The method \code{as.smet} coerces an object or a charachter string to a SMET. If the object is 
+#'
+#' 
 #' 
 #' @param object the object to be coerced
 #' @param mult,offset numeric vectors of unit multiplier and offset respectivaly
@@ -73,9 +74,8 @@ as.smet <- function (object=NULL,...)  {
 
 NULL
 #' 
-#' 
-
-#' 
+#' @title as.smet
+#' @description as.smet
 #' @rdname as.smet
 #' @method as.smet default
 #' @aliases as.smet 
@@ -95,7 +95,8 @@ setGeneric("as.smet",function (object,...)  {
 
 NULL
 #'
-#' 
+#' @title as.smet
+#' @description as.smet
 #' @rdname as.smet
 #' @method as.smet character
 #' @aliases as.smet 
@@ -131,6 +132,9 @@ setMethod("as.smet","character",function(object,...) {
 
 NULL
 #'
+#' @title as.smet
+#' @description as.smet
+#' 
 #' 
 #' @rdname as.smet
 #' @method as.smet data.frame
@@ -287,7 +291,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	  	
 	   if (mntz!=0) {
 		   
-		   tz <- sprinft("+%02d:%02d",trunc(tzv),mntz)
+		   tz <- sprintf("+%02d:%02d",trunc(tzv),mntz)
 	   
 	   } else {
 		   
@@ -304,7 +308,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	   
 	   if (mntz!=0) {
 		   
-		   tz <- sprinft("-%02d:%02d",-trunc(tzv),mntz)
+		   tz <- sprintf("-%02d:%02d",-trunc(tzv),mntz)
 		   
 	   } else {
 		   
@@ -348,6 +352,8 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 
 NULL
 #'
+#' @title as.smet
+#' @description as.smet
 #' 
 #' 
 #' @rdname as.smet
@@ -366,6 +372,9 @@ setMethod("as.smet","list",function(object,...) {base::lapply(X=object,FUN=RSMET
 	
 NULL
 #'
+#' @title as.smet
+#' @description as.smet
+#' 
 #' 
 #' @rdname as.smet
 #' @method as.smet smet

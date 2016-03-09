@@ -1,9 +1,7 @@
 NULL
-#### TO DO SISTEMRARE meteoioini_MULTIPLIER PER RH..
-
-
-
-#' Coerces an object to a \code{meteoioini-class}  object
+#' @title Coerces an object to a \code{meteoioini-class}  object
+#' 
+#' @description It coerces an object to a \code{meteoioini-class}  object. In case the object is a character string, it is considered to be the name of an INI file and the \code{meteoioini-class}  object is imported. 
 #' 
 #' @param object the object to be coerced
 #' 

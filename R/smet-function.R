@@ -3,6 +3,9 @@ NULL
 
 #' Function to read a  a SMET file
 #' 
+#' 
+#' 
+#' 
 #' @param file  SMET file name
 #' @param numeric logical value
 #' @param timezone.offset.sign It can be \code{"negative"} or \code{"positive"}. Many systems support timezones of the form GMT+n and GMT-n, which are at a fixed offset from UTC (hence no DST). Contrary to some usage (but consistent with names such as PST8PDT), negative offsets are times ahead of (east of) UTC, positive offsets are times behind (west of) UTC.

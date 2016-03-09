@@ -28,7 +28,7 @@ NULL
 #' 
 #' @references \url{http://models.slf.ch/docserver/meteoio/html/configuration.html} 
 #' 
-#' #' @note A \code{meteoioini-class} object can be created by a MeteoIO  file
+#' @note A \code{meteoioini-class} object can be created by a MeteoIO  file
 #' 
 #' 
 #' @docType class 

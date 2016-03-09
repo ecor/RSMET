@@ -76,7 +76,7 @@ meteoioini <- function(file=NULL,comment="#",
 	
 	for (it in unique(groups)) {
 		
-		print(it)
+		##print(it)
 		value <- string[groups==it]
 		value <- value[stringr::str_detect(value,"=")]
 		value <- as.list(value)

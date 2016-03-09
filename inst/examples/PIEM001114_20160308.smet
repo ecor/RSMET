@@ -1,0 +1,20 @@
+SMET 1.1 ASCII
+[HEADER]
+station_id = PIEM001114
+latitude = 45.15421
+longitude = 6.916477
+altitude = 2745
+nodata = -999
+tz =                 +00
+fields = timestamp TA HS
+units_offset = 0 0 0 
+units_multiplier = 1 1 1 
+station_name =                 RIFUGIO VACCARONE
+municipality =                 GIAGLIONE  (TO)
+location =                 RIFUGIO VACCARONE
+station_url =                 http://webgis.arpa.piemonte.it/webmeteo/meteo.php?CODTOT=001114901
+
+[DATA]
+2016-03-08T08:00:00 -999.00    0.78
+2016-03-08T15:00:00 -999.00    0.71
+2016-03-08T16:06:13  269.65 -999.00

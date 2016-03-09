@@ -21,6 +21,12 @@ NULL
 #' newsmet_ <- collapse.smet(x=smet2,y=smet1)
 #' 
 #' 
+#' x <- smet(system.file('examples/PIEM001114.smet',package="RSMET"))
+#' y <- smet(system.file('examples/PIEM001114_20160308.smet',package="RSMET"))
+#' 
+#' 
+#' xy <-  collapse.smet(x,y) 
+#' 
 
 collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
@@ -41,6 +47,40 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 		
 	#######
 	
+	
+	
+	xf <- fields(x)
+	yf <- fields(y)
+	
+	ff <- union(xf,yf)
+	
+	multiplier <- union(x@header$units_multiplier,y@header$units_multiplier)
+	offset <- union(x@header$units_offset,x@header$units_offset)
+	
+	cond3 <- all(names(multiplier)==names(offset)) & all(names(multiplier)==ff)
+	
+	if (cond3!=TRUE) {
+		
+		
+		msg <- sprintf("Mismatch in fiels: %s , %s , %s",paste(names(multiplier),collapse=" "),
+				paste(names(offset),collapse=" "),paste(ff,collapse=" "))
+								
+		stop(msg)
+		
+	}
+	
+	dy <- ff[!(ff %in% xf)] 
+	dx <- ff[!(ff %in% yf)]
+	
+	
+	x[,dy,multiplier=multiplier[dy],offset=offset[dy]] <- NA ## look at 
+
+	y[,dx,multiplier=multiplier[dx],offset=offset[dx]] <- NA 
+	
+	x <- x[,ff]
+	y <- y[,ff]
+	
+	
 	if (!identical(header_values_x,header_values_y)) {
 		
 		s <- list()
@@ -52,18 +92,27 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 			my[[it]] <- str_trim(paste(header_values_y[[it]],collapse=" "))
 			s[[it]] <- sprintf("%s: %s == %s",it,mx[[it]],my[[it]]) ###%(header_values_x)
 			cwarn[[it]] <- (mx[[it]]!=my[[it]])
-
+			
 		}
-
+		
 		iw <- which(unlist(cwarn))
 		if (length(iw)>=1) { 
 			iw <- unique(c(iw,which(headers=="station_id")))
-		    m <- c("Collapsing SMET : header mismatch!!!",unlist(s[iw]))
-		    m <- paste(m,collapse="   ")
-		
+			m <- c("Collapsing SMET : header mismatch!!!",unlist(s[iw]))
+			m <- paste(m,collapse="   ")
+			
 			warning(m)
 		}
 	}
+	###################
+	
+	
+	
+	
+	
+	####################
+	
+	
 	
 	out <- x 
 	
@@ -91,7 +140,7 @@ collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	cond <- array(FALSE,length(nonuniq))
 	
 	if (length(nonuniq)>=1) for (i in 1:length(nonuniq)) {
-		print(i)
+		###print(i)
 		prev <- as.vector(dd[nonuniq_prev[i],])
 		v <- as.vector(dd[nonuniq[i],])
 	
