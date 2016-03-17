@@ -146,8 +146,9 @@ NULL
 setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="timestamp",station.field="station_id",header.fields=c("longitude","latitude","station_id" ,"altitude","location"),variables=NULL,force.multistation=FALSE,
 				metaparam=attr(object,"metaparam"),file=NA,...) {
 		
-			
-		
+	### IN CASE VARIABLES AND HEADER FIELDS ARE SET AS A UNIQUE STRING!!		
+	variables <- unlist(str_split(variables,","))
+    header.fields <- unlist(str_split(header.fields,","))	
 	############ MULTISTATION OPTION 
 	multistation <- FALSE
 	if (is.null(station.field)) station.field <- NA
@@ -163,10 +164,10 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	if (force.multistation==TRUE) multistation <- TRUE
 	if (multistation==TRUE) {	
 		
+		
 		header.fields <- union(header.fields,station.field)
 		header.fields <- header.fields[header.fields %in% names(object)]
 		names(header.fields) <- header.fields
-		
 		
 		
 		if (!is.null(variables)) {
