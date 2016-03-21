@@ -260,7 +260,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 	   
 	#   out@data[,names(mult)]  <- t(apply(X= out@data[,names(mult)],FUN=function(x,mult) {x/mult},mult=mult,MARGIN=1))
 	   
-	   out@header$units_multpier[names(mult)] <- mult
+	   out@header$units_multiplier[names(mult)] <- mult
    }  
    
    if (!is.na(offset)) {
