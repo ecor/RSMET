@@ -200,15 +200,19 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 		if (date.field %in% names(data)) {
 			
 			data <- data
+			
 			times <- data[,date.field]
-			data <- data[,names(data)!=date.field]
+		
 			
 			
 			data$times_temp <- as.POSIXlt(times,format=date.format,tz=tz)
 			
-			
+			data <- data[,names(data)!=date.field] ## EC 20160523
 			names(data)[names(data)=="times_temp"] <- date.field
+			
 			data <- data[,header$fields]
+			
+			
 			
 			####
 			
@@ -231,7 +235,7 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	#		[13] "2015-10-31 08:00:00 GMT" "2015-11-03 08:30:00 GMT"
 	#		[15] "2015-11-04 08:30:00 GMT" "2015-11-04 12:00:00 GMT"
 	#		> help(sort,help_type="html")
-			row.names(data) <- sprintf("%09d",1:nrow(data))
+			row.names(data) <- sprintf("%020d",1:nrow(data))
 			times <- data[,date.field]
 			names(times) <- row.names(data)
 			
