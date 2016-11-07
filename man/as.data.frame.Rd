@@ -5,7 +5,8 @@
 \alias{as.data.frame.smet}
 \title{Coerces a \code{smet-class} object to a data frame}
 \usage{
-\method{as.data.frame}{smet}(x, ..., date.field = "timestamp")
+\method{as.data.frame}{smet}(x, ..., date.field = "timestamp",
+  add.header = FALSE, use.melt = FALSE)
 }
 \arguments{
 \item{x}{a \code{smet-class} object}
@@ -13,6 +14,10 @@
 \item{...}{further arguments}
 
 \item{date.field}{field neme used for date and time. Default is \code{"timestamp"}.}
+
+\item{add.header}{logical If \code{TRUE} it adds header scalar attributes as fields of the data frame. Default is \code{FALSE}.}
+
+\item{use.melt}{logical. Default is \code{FALSE}. If it is \code{TRUE}, the result is melted with \code{\link{melt}}.}
 }
 \description{
 Coerces a \code{smet-class} object to a data frame
