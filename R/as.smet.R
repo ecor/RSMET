@@ -88,6 +88,7 @@ NULL
 #' @aliases as.smet 
 #' @export
 
+source('/home/ecor/Dropbox/R-packages/RSMET/R/as.smet.R') 
 
 setGeneric("as.smet",function (object,...)  {
 	
@@ -263,14 +264,14 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    
   ##### NOT CORRECT!!! 
    
-   if (!is.na(mult)) {
+   if (!is.na(mult[1])) {
 	   
 	#   out@data[,names(mult)]  <- t(apply(X= out@data[,names(mult)],FUN=function(x,mult) {x/mult},mult=mult,MARGIN=1))
 	   
 	   out@header$units_multiplier[names(mult)] <- mult
    }  
    
-   if (!is.na(offset)) {
+   if (!is.na(offset[1])) {
 	   
 	 #  out@data[,names(offset)]  <- t(apply(X= out@data[,names(offset)],FUN=function(x,mult) {x-offset},offset=offset,MARGIN=1))
 	   
