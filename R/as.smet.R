@@ -88,7 +88,6 @@ NULL
 #' @aliases as.smet 
 #' @export
 
-source('/home/ecor/Dropbox/R-packages/RSMET/R/as.smet.R') 
 
 setGeneric("as.smet",function (object,...)  {
 	
