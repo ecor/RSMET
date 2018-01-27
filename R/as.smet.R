@@ -395,6 +395,10 @@ NULL
 	setMethod("as.smet","smet",function(object,...) { 
 				
 				
+				
+				## add fields here 
+				
+				
 				args <- base::list(...)
 				slotnames <- names(getSlots("smet"))
 				
