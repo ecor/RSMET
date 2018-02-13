@@ -71,8 +71,8 @@ smet <- function(file=NULL,numeric=TRUE,non_numeric_fields=NULL,
 	
 	
 	
-	iheader <- which(string=="[HEADER]")
-	idata <- which(string=="[DATA]")
+	iheader <- which(stringr::str_trim(string)=="[HEADER]")
+	idata <- which(stringr::str_trim(string)=="[DATA]")
 	
 	signature <- paste(string[1:(iheader-1)],collapse=";")
 	
