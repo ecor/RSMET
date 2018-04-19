@@ -28,6 +28,9 @@ NULL
 #' xy <-  collapse.smet(x,y) 
 #' 
 
+
+## 
+
 collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
 	x <- as.smet(x) ## x and y must be smet!

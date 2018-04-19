@@ -12,7 +12,7 @@ NULL
 #' 
 #' @seealso \code{\link{smet-class}}, \code{\link{smet}},\code{\link{as.data.frame}}
 #' @import methods
-#' 
+#' @importFrom reshape2 melt
 #' @rdname as.data.frame
 #' @method as.data.frame smet
 #' @aliases as.data.frame 
