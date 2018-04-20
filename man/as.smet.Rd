@@ -93,7 +93,8 @@ sm <- as.smet(data)
 
 # In case of multiple station, it return a list of SMET-class objects: 
 
-## This opton works for more than one station, in case of one station this works too only if it is FORCED!
+## This opton works for more than one station, 
+#in case of one station this works too only if it is FORCED!
 
 sm_multi <- as.smet(meteofrance,variables=variables)
 

@@ -56,7 +56,8 @@ NULL
 #' 
 #' # In case of multiple station, it return a list of SMET-class objects: 
 #' 
-#' ## This opton works for more than one station, in case of one station this works too only if it is FORCED!
+#' ## This opton works for more than one station, 
+#' #in case of one station this works too only if it is FORCED!
 #' 
 #' sm_multi <- as.smet(meteofrance,variables=variables)
 #' 
@@ -88,7 +89,10 @@ NULL
 #' @aliases as.smet 
 #' @export
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a00e61fd633beba91681af6a3ae2aaeccf6179d5
 
 setGeneric("as.smet",function (object,...)  {
 	
@@ -394,6 +398,10 @@ NULL
 	
 	
 	setMethod("as.smet","smet",function(object,...) { 
+				
+				
+				
+				## add fields here 
 				
 				
 				args <- base::list(...)

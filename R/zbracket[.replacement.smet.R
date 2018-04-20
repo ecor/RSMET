@@ -111,7 +111,7 @@ NULL
 #		
 #		added <- fiel
 #		
-#		
+#		/home/ecor/Dropbox/R-packages/RSMET/R/as.smet.R
 #		
 #	}
 	
