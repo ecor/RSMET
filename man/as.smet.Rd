@@ -3,10 +3,15 @@
 \docType{methods}
 \name{as.smet}
 \alias{as.smet}
+\alias{as.smet}
 \alias{as.smet,character-method}
+\alias{as.smet}
 \alias{as.smet,data.frame-method}
+\alias{as.smet}
 \alias{as.smet,list-method}
+\alias{as.smet}
 \alias{as.smet,smet-method}
+\alias{as.smet}
 \title{Coerces an object to a \code{smet-class}  object}
 \usage{
 as.smet(object, ...)
@@ -101,4 +106,3 @@ sm_o <- as.smet(onestation,variables=variables,force.multistation=TRUE)
 
 
 }
-

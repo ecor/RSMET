@@ -2,10 +2,10 @@
 % Please edit documentation in R/print.smet.R
 \docType{methods}
 \name{print.smet}
-\alias{print}
 \alias{print.smet}
-\alias{show}
+\alias{print}
 \alias{show,smet-method}
+\alias{show}
 \title{"Print" and "Show" method for "smet-class" object}
 \usage{
 \method{print}{smet}(x, date.field = "timestamp",
@@ -42,4 +42,3 @@ print(sm)
 \seealso{
 \code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}},\code{\link{print.meteoioini}}
 }
-
