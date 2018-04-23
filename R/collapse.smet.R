@@ -29,7 +29,7 @@ NULL
 #' 
 
 
-## 
+## /
 
 collapse.smet <- function (x,y,headers=NULL,date.field="timestamp") {
 	
