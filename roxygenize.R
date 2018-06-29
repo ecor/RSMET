@@ -20,12 +20,13 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ###############################################################################
+rm(list=ls())
 library(roxygen2)
 
 options(repos = c(CRAN="http://cran.r-project.org"))
 
-
-path <- "/home/ecor/Dropbox/R-packages" 
+path <- '/STORAGE/projects/R-Packages' 
+###path <- "/home/ecor/Dropbox/R-packages" 
 pkg_name <- "RSMET"
 pkg_dir <- paste(path,pkg_name,sep="/")
 cran_pkg_path <- paste(path,"toCran",sep="/")

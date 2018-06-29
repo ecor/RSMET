@@ -62,10 +62,9 @@ gsnow <- ggmap(map) +
 ## ggsave("test-map.pdf", gsnow,width=10,height=10)
  
 }
-\author{
-Emanuele Cordano
-}
 \seealso{
 \code{\link{as.smet}}
 }
-
+\author{
+Emanuele Cordano
+}
