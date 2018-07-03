@@ -3,13 +3,9 @@
 \docType{methods}
 \name{as.meteoioini}
 \alias{as.meteoioini}
-\alias{as.meteoioini}
 \alias{as.meteoioini,character-method}
-\alias{as.meteoioini}
 \alias{as.meteoioini,list-method}
-\alias{as.meteoioini}
 \alias{as.meteoioini,meteoioini-method}
-\alias{as.meteoioini}
 \title{Coerces an object to a \code{meteoioini-class}  object}
 \usage{
 as.meteoioini(object, ...)
@@ -37,3 +33,4 @@ ini <- as.meteoioini("test")
 
 
 }
+

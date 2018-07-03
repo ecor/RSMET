@@ -3,9 +3,7 @@
 \docType{methods}
 \name{fields}
 \alias{fields}
-\alias{fields}
 \alias{fields,smet-method}
-\alias{fields}
 \title{Extract the fields  of  a \code{smet-class}  object}
 \usage{
 fields(object, ...)
@@ -40,3 +38,4 @@ fields(x)
 
 
 }
+

@@ -28,3 +28,4 @@ ini <- meteoioini(file)
 \seealso{
 \code{\link{meteoioini-class}},\code{\link{print.meteoioini}}
 }
+

@@ -27,6 +27,9 @@ showClass("smet")
 as.smet("test")
 
 }
+\author{
+Emanuele Cordano
+}
 \references{
 \url{http://models.slf.ch/docserver/meteoio/html/smetio.html} or \url{http://models.slf.ch/docserver/meteoio/SMET_specifications.pdf}
 
@@ -39,7 +42,5 @@ or returned by the function \code{\link{smet}}
 
 \code{\link{smet-class}}
 }
-\author{
-Emanuele Cordano
-}
 \keyword{classes}
+

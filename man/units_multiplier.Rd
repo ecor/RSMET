@@ -18,3 +18,4 @@ x <- smet(system.file('examples/PIEM001114.smet',package="RSMET"))
 units_multiplier(x)
 
 }
+

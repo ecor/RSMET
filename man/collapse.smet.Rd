@@ -38,3 +38,4 @@ y <- smet(system.file('examples/PIEM001114_20160308.smet',package="RSMET"))
 xy <-  collapse.smet(x,y) 
 
 }
+

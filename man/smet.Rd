@@ -47,3 +47,4 @@ sm <- smet(file)
 \seealso{
 \code{\link{smet-class}}
 }
+

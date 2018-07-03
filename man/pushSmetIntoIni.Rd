@@ -47,3 +47,4 @@ newini <- pushSmetIntoIni(AA=AA,BB=BB,ini=ini)
 ##  NOT YET IMPLEMENTED
 
 }
+
