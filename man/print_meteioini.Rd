@@ -38,3 +38,4 @@ print(ini)
 \seealso{
 \code{\link{smet-class}}, \code{\link{smet}},\code{\link{writeLines}}
 }
+

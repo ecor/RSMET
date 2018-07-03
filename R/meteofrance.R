@@ -44,8 +44,14 @@ NULL
 #' 
 #' @examples  
 #' 
+#' 
+#' 
+#' 
 #' library(ggmap)
 #' data(meteofrance)
+#' 
+#' \dontrun{
+#' ## See help(get_map) documentation and run the example with a connection to Google!
 #' 
 #' dates <- as.Date(meteofrance$timestamp)
 #' 
@@ -63,5 +69,6 @@ NULL
 #' 
 #' ## Uncomment if you want to save in PDF format the otput of gsnow
 #' ## ggsave("test-map.pdf", gsnow,width=10,height=10)
-#'  
+#' }
+ 
 NULL

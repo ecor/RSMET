@@ -89,10 +89,6 @@ NULL
 #' @aliases as.smet 
 #' @export
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a00e61fd633beba91681af6a3ae2aaeccf6179d5
 
 setGeneric("as.smet",function (object,...)  {
 	

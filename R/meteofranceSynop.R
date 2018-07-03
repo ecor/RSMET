@@ -16,8 +16,8 @@ NULL
 #' data(meteofranceSynop)
 #' 
 #' 
-#' 
-#' 
+#' \dontrun{
+#' ## See help(get_map) documentation and run the example with a connection to Google!
 #' data=meteofranceSynop[meteofranceSynop$timestamp==meteofranceSynop$timestamp[250],]
 #' 
 #' 
@@ -32,5 +32,5 @@ NULL
 #' 
 #' ## Uncomment if you want to save in PDF format the otput of gsynop
 #' ## ggsave("test-map.pdf", gsynop,width=10,height=10)
-#'  
+#' } 
 NULL

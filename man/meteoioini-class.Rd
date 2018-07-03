@@ -35,13 +35,14 @@ showClass("meteoioini")
 as.meteoioini("test")
 
 }
+\author{
+Emanuele Cordano
+}
 \references{
 \url{http://models.slf.ch/docserver/meteoio/html/configuration.html}
 }
 \seealso{
 \code{\link{meteoioini}},\code{\link{print.meteoioini}}
 }
-\author{
-Emanuele Cordano
-}
 \keyword{classes}
+

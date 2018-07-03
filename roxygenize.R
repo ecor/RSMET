@@ -77,7 +77,7 @@ if (toCran) {
 			system(paste("rm -rf",cran_pkg_unuseful,sep=" "))
 			
 			
-			toremove <- c(".DS_Store","inst/.DS_Store","inst/doc/.DS_Store","inst/doc/examples/.DS_Store","inst/doc/examples/snowstuff/.DS_Store","inst/template/.DS_Store","inst/template/friuli/.DS_Store", ".Rapp.history")
+			toremove <- c(".DS_Store","inst/.DS_Store","inst/doc/.DS_Store","inst/doc/examples/.DS_Store","inst/doc/examples/snowstuff/.DS_Store","inst/template/.DS_Store","inst/template/friuli/.DS_Store", ".Rapp.history","README.md")
 			cran_pkg_unuseful <- paste(cran_pkg_dir,toremove,sep="/")
 			for (it in cran_pkg_unuseful) {
 				
@@ -88,6 +88,6 @@ if (toCran) {
 			
 	}
 
-
-
+#### <<
+### ggmap
 
