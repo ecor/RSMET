@@ -33,4 +33,3 @@ ini <- as.meteoioini("test")
 
 
 }
-

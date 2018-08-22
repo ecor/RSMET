@@ -2,6 +2,7 @@
 
 S3method("[",smet)
 S3method("[<-",smet)
+S3method(aggregate,smet)
 S3method(as.data.frame,smet)
 S3method(print,meteoioini)
 S3method(print,smet)
@@ -25,3 +26,4 @@ exportMethods(show)
 import(methods)
 import(stringr)
 importFrom(reshape2,melt)
+importFrom(stats,aggregate)

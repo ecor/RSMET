@@ -42,4 +42,3 @@ gsynop <- ggmap(map) +
 \author{
 Emanuele Cordano
 }
-

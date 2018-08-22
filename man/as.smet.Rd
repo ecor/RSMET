@@ -102,4 +102,3 @@ sm_o <- as.smet(onestation,variables=variables,force.multistation=TRUE)
 
 
 }
-

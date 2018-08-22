@@ -48,7 +48,7 @@ as.data.frame.smet <- function(x,...,date.field="timestamp",add.header=FALSE,use
 	temp <- out
 	
 	####if (length(i)==1) out <- as.data.frame(out[,i])
-	
+	out[out==x@header$nodata] <- NA
 	## insert here SI.UNIT==false https://en.wikipedia.org/wiki/International_System_of_Units
 	if (length(i)>1) {
 		out[,i] <- t(apply(X=as.data.frame(out[,i]),FUN=function(x,mult,offset) {x*mult+offset},mult=mult[i],offset=offset[i],MARGIN=1))
@@ -59,14 +59,12 @@ as.data.frame.smet <- function(x,...,date.field="timestamp",add.header=FALSE,use
 	
 	header <- x@header
 	header$units_multiplier <- header$units_multiplier*0+1
-	header$units_offset <- header$units_offset*0+1
-	
-	
+	header$units_offset <- header$units_offset*0+0
 	attr(out,"header") <- header
 	attr(out,"signature") <- x@signature
 	
 	
-	out[out==x@header$nodata] <- NA
+	##out[out==x@header$nodata] <- NA
 	
 	if (add.header==TRUE) {
 		
