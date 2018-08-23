@@ -149,7 +149,7 @@ NULL
 #' @aliases as.smet 
 #' @export
 #' 
-#' 
+#'
 
 setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="timestamp",station.field="station_id",header.fields=c("longitude","latitude","station_id" ,"altitude","location"),variables=NULL,force.multistation=FALSE,
 				metaparam=attr(object,"metaparam"),file=NA,...) {
@@ -248,7 +248,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    
    
    
-   out@data <- object
+   out@data <- object ## 
    
    out@header$fields <- names(out@data)
    
@@ -284,7 +284,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    if (!is.null(metaparam)) {
 	   
 	   ids <- which(metaparam$SMET_ID %in% out@header$fields) 
-	   out@header$units_multpier[metaparam$SMET_ID[ids]] <- metaparam$SMET_UNIT_MULTIPLIER[ids]
+	   out@header$units_multiplier[metaparam$SMET_ID[ids]] <- metaparam$SMET_UNIT_MULTIPLIER[ids]
 	   out@header$units_offset[metaparam$SMET_ID[ids]] <- metaparam$SMET_UNIT_OFFSET[ids]
 	   
 	   
@@ -349,6 +349,16 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
 		
 	}
 	
+	
+	#####
+	nnf <- out@header$fields[out@header$fields!=date.field]
+	## 
+	for (itf in nnf) {
+	
+		out@data[,itf] <- out@data[,itf]/out@header$units_multiplier[itf]-out@header$units_offset[itf]
+	}
+	##
+	##
 	
 	#####
 	

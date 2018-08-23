@@ -12,16 +12,24 @@
 \arguments{
 \item{x}{a \code{\link{smet-class}} object}
 
-\item{...}{further arguments}
+\item{date.field}{field name used for date and time. Default is \code{"timestamp"}, as used for \code{SMET} format.}
+
+\item{INDEX, FUN, ...}{further arguments for \code{\link{tapply}}}
+
+\item{by}{an index vector or a chararacter vector defining the time interval used for aggregation. Default is \code{c("hourly","daily","monthly","yearly")}, it can be one of these character values, in case of vectore with caracheter values. only the first element is considered.}
+
+\item{past}{logical value. If it is \code{TRUE} aggregation value is referenced to the time step before the \code{date.field} (e.g. \code{"timestamp"} instant value, otherwise it is referenced to the timestep after the \code{date.field} value.}
 }
 \description{
 aggregate
+}
+\details{
+\code{FUN} can be one function or a list of functions where each function is used to aggregate each time-series variable of the \code{\link{smet-class}} object object. In case \code{FUN} is a \code{list} , each function element should be named with the respectiva variable name and all functions must have the seme arguments passed through \code{...} .
 }
 \examples{
 smet <- as.smet(system.file("examples/T0179.smet",package="RSMET"))
 
 out <- aggregate(smet)
-
 
 
 }

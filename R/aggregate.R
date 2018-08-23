@@ -1,8 +1,14 @@
 NULL
 #'
 #' @param x a \code{\link{smet-class}} object
-#' @param ... further arguments
-#' 
+
+#' @param date.field   field name used for date and time. Default is \code{"timestamp"}, as used for \code{SMET} format.
+#' @param by an index vector or a chararacter vector defining the time interval used for aggregation. Default is \code{c("hourly","daily","monthly","yearly")}, it can be one of these character values, in case of vectore with caracheter values. only the first element is considered. 
+#' @param past logical value. If it is \code{TRUE} aggregation value is referenced to the time step before the \code{date.field} (e.g. \code{"timestamp"} instant value, otherwise it is referenced to the timestep after the \code{date.field} value.
+#' @param INDEX,FUN,... further arguments for \code{\link{tapply}}
+
+#' @details \code{FUN} can be one function or a list of functions where each function is used to aggregate each time-series variable of the \code{\link{smet-class}} object object. In case \code{FUN} is a \code{list} , each function element should be named with the respectiva variable name and all functions must have the seme arguments passed through \code{...} .  
+
 #' @title aggregate
 #' @description aggregate
 #' @rdname aggregate
@@ -10,34 +16,28 @@ NULL
 #' @aliases aggregate 
 #' @export
 #' @importFrom stats aggregate
+#' @importFrom lubridate seconds day<- hour<- hours minute<- month<- second<-
+#' ' @ssealso \code{\lik{as.smet}},\code{\link{tapply}}
 #' @examples
 #' smet <- as.smet(system.file("examples/T0179.smet",package="RSMET"))
 #' 
 #' out <- aggregate(smet)
-#'
-#' 
+#' out_d <- aggregate(smet,by="daily",past=FALSE)
 #' 
 
-#
-#setMethod("aggregate","smet",function(object,...) {
-#			
-#			out <- NULL
-#			return(out)
-#			
-#		})
-#
 
 
 aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("hourly","daily","monthly","yearly"),past=TRUE,...) {
 	
-	message("WORK in Progress!!")
+	
 	out <- x
 	
 	if (date.field %in% fields(x)) { 
 	
 		
 		out <- as.data.frame(x)		
-		out2 <- out
+		mult <- x@header$units_multiplier
+		offset  <- x@header$units_offset
 		### AGGREGATE HERE 
 		t_time <- out[,date.field]
 		ivars <- which(names(out)!=date.field)
@@ -135,14 +135,10 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 		outn <- data.frame(timestamp=timestamp)
 		names(outn) <- date.field
-		print(ffields)
-		str(FUN)
+		
 		for (it in ffields) {
 				
-			print(it)
-			str(INDEX)
-			str(out[,it])
-			print(FUN[[it]])
+			
 			vect <- tapply(X=out[,it],FUN=FUN[[it]],INDEX=INDEXc,...)
 			outn[,it] <- vect[timestamp_c]
 				
@@ -169,7 +165,7 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 		####
 		attr(outn,"header") <- attr(out,"header")
-		out <- as.smet(outn,date.field=date.field)
+		out <- as.smet(outn,date.field=date.field,mult=mult,offset=offset)
 	
 	
 	} else { 
