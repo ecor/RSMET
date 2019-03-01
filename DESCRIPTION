@@ -16,7 +16,7 @@ Description: It manages snow and weather local time series as provided by
     exported to a SMET ini files of MeteoIO , allowing interoperability from R to
     MeteoIO and other SMET-compliant software.
 Version: 1.3.9
-Date: 2018-08-20
+Date: 2018-03-01
 Repository: CRAN
 Depends:
     stringr,reshape2,lubridate

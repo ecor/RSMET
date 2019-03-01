@@ -30,6 +30,9 @@ aggregate
 smet <- as.smet(system.file("examples/T0179.smet",package="RSMET"))
 
 out <- aggregate(smet)
+out_d <- aggregate(smet,by="daily",past=FALSE)
 
-
+}
+\seealso{
+\code{\link{as.smet}},\code{\link{tapply}}
 }

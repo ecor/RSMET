@@ -17,8 +17,7 @@ NULL
 #' @export
 #' @importFrom stats aggregate
 #' @importFrom lubridate seconds day<- hour<- hours minute<- month<- second<-
-#' @seealso \code{\link{as.smet}},\code{\link{tapply}}
-#' @deteils Aggregation and Clean of a raw \code{\link{smet-class}} object.
+#' ' @ssealso \code{\lik{as.smet}},\code{\link{tapply}}
 #' @examples
 #' smet <- as.smet(system.file("examples/T0179.smet",package="RSMET"))
 #' 
@@ -49,19 +48,10 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		if (length(itocheck)>0) {
 			
 			dftt <- data.frame(ic=itocheck,hasNA=hasNA[itocheck],t_time=as.character(t_time[itocheck]))
-		
 			valid_row <- tapply(X=dftt$hasNA,FUN=min,INDEX=dftt$t_time)
-			dftt$valid_row <- dftt$hasNA==valid_row[dftt$t_time]
-			
-			##dftta <- dftt$ic[dftt$hasNA>=dftt$valid_row,] ## EC20190228
-			##dftt$valid_row <- TRUE
-			##dftt$valid_row <- duplicated(dftt$valid_row)
-			
-			icvd <- which(dftt$valid_row==TRUE)
-			
-			dftt$valid_row[icvd] <- !duplicated(dftt$t_time[icvd])
-			
-			out <- out[dftt$valid_row==TRUE,]
+			dftt$valid_row <- valid_row[dftt$t_time]
+			dftta <- dftt[dftt$hasNA!=dftt$valid_row,]
+			out <- out[-dftta$ic,]
 			t_time <- out[,date.field]
 		}
 		##check <- tapply(X=hasNA,INDEX=t_time,FUN=min) 		
@@ -175,7 +165,6 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 		####
 		attr(outn,"header") <- attr(out,"header")
-	
 		out <- as.smet(outn,date.field=date.field,mult=mult,offset=offset)
 	
 	
