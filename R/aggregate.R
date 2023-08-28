@@ -48,7 +48,7 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 		if (length(itocheck)>0) {
 			
-			dftt <- data.frame(ic=itocheck,hasNA=hasNA[itocheck],t_time=as.character(t_time[itocheck]))
+			dftt <- data.frame(ic=itocheck,hasNA=hasNA[itocheck],t_time=format(t_time[itocheck])) ## Ec 20230828
 		
 			valid_row <- tapply(X=dftt$hasNA,FUN=min,INDEX=dftt$t_time)
 			dftt$valid_row <- dftt$hasNA==valid_row[dftt$t_time]
@@ -138,10 +138,12 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 			
 		date.format="%Y-%m-%dT%H:%M:%S"
-		INDEXc <- as.character(INDEX,format=date.format)
+		## 
+		#INDEXc <- as.character(INDEX,format=date.format)
+		INDEXc <- format(INDEX,format=date.format)
 		timestamp <- sort(unique(INDEX))
-		timestamp_c <- as.character(timestamp,format=date.format)
-		
+	##	timestamp_c <- as.character(timestamp,format=date.format)
+		timestamp_c <- format(timestamp,format=date.format)
 		
 		outn <- data.frame(timestamp=timestamp)
 		names(outn) <- date.field

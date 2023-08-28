@@ -56,8 +56,8 @@ print.smet <- function(x,
 	}
 	if (date.field %in% names(x@data)) {
 	
-		x@data[,date.field] <- as.character(x@data[,date.field],format=date.format)
-	
+	##	x@data[,date.field] <- as.character(x@data[,date.field],format=date.format)
+		x@data[,date.field] <- format(x@data[,date.field],format=date.format)
 	}
 	
 	

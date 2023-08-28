@@ -292,7 +292,7 @@ setMethod("as.smet","data.frame",function(object,mult=NA,offset=NA,date.field="t
    }
    
    tt <- out@data[1,date.field]
-   tzv <- round(as.numeric(as.POSIXlt(as.character(tt),tz="GMT")-tt,units="hours")/0.5)*0.5
+   tzv <- round(as.numeric(as.POSIXlt(format(tt),tz="GMT")-tt,units="hours")/0.5)*0.5  ## EC 20230828
    
    if (tzv>=0) {
 	   

@@ -128,9 +128,9 @@ aggregate.smet <- function(x,date.field="timestamp",FUN=mean,INDEX=by[1],by=c("h
 		
 			
 		date.format="%Y-%m-%dT%H:%M:%S"
-		INDEXc <- as.character(INDEX,format=date.format)
+		INDEXc <- format(INDEX,format=date.format)
 		timestamp <- sort(unique(INDEX))
-		timestamp_c <- as.character(timestamp,format=date.format)
+		timestamp_c <- format(timestamp,format=date.format)
 		
 		
 		outn <- data.frame(timestamp=timestamp)
