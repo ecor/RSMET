@@ -4,10 +4,17 @@
 \alias{smet}
 \title{Function to read a  a SMET file}
 \usage{
-smet(file = NULL, numeric = TRUE, non_numeric_fields = NULL,
+smet(
+  file = NULL,
+  numeric = TRUE,
+  non_numeric_fields = NULL,
   timezone.offset.sign = c("negative", "positive", "-", "+"),
-  date.field = "timestamp", date.format = "\%Y-\%m-\%dT\%H:\%M:\%S",
-  comment = "#", station.field = "station_id", ...)
+  date.field = "timestamp",
+  date.format = "\%Y-\%m-\%dT\%H:\%M:\%S",
+  comment = "#",
+  station.field = "station_id",
+  ...
+)
 }
 \arguments{
 \item{file}{SMET file name}

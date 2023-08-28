@@ -12,10 +12,10 @@ This class represents the SMET format file for weather station data
  \describe{
     \item{\code{signature}:}{A charachter string containing SMET signature}
 
-\item{\code{header}:}{Object of class \code{"list"} containing the Header Section, each key corresponds to a component of the list.    }
+    \item{\code{header}:}{Object of class \code{"list"} containing the Header Section, each key corresponds to a component of the list.    }
     \item{\code{data}:}{S3 Object of class \code{"data.frame"} containing the weather data values. Date field is often alled \code{"timestamp"} and written in \code{\link{POSIXlt}} format. }
 
-\item{\code{file}:}{full name of the SMET file. If it is missing, it is \code{NA}.}
+	   \item{\code{file}:}{full name of the SMET file. If it is missing, it is \code{NA}.}
  }
 
 Detailed information about SMET format is reminded to \url{http://models.slf.ch/docserver/meteoio/SMET_specifications.pdf}.

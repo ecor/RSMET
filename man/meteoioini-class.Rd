@@ -12,17 +12,18 @@ This class represents the MeteoIO ini format file for weather station data
  \describe{
     \item{\code{General}:}{General envirment (list)}
 
-\item{\code{Input}:}{Input envirment (list)}
+    \item{\code{Input}:}{Input envirment (list)}
 
-\item{\code{Output}:}{Output envirment (list)}
+    \item{\code{Output}:}{Output envirment (list)}
 
-\item{\code{Filters}:}{Filters envirment (list)}
+    \item{\code{Filters}:}{Filters envirment (list)}
 
-\item{\code{Interpolation2D}:}{Interpolation2D envirment (list)}
+	   \item{\code{Interpolation2D}:}{Interpolation2D envirment (list)}
 
-\item{\code{file}:}{full name of the SMET file. If it is missing, it is \code{NA}.}
+    \item{\code{file}:}{full name of the SMET file. If it is missing, it is \code{NA}.}
 
-}
+    
+ }
 
 Detailed information about SMET format is reminded to \url{http://models.slf.ch/docserver/meteoio/SMET_specifications.pdf}.
 }

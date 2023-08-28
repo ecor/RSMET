@@ -6,8 +6,7 @@
 \alias{Extract}
 \title{\code{[} S3 method for \code{\link{smet-class}} object}
 \usage{
-\method{[}{smet}(x, rows = "all", fields = "all", file = NA,
-  date.field = "timestamp", ...)
+\method{[}{smet}(x, rows = "all", fields = "all", file = NA, date.field = "timestamp", ...)
 }
 \arguments{
 \item{x}{a \code{\link{smet-class}} object}

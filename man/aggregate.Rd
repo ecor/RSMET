@@ -5,9 +5,15 @@
 \alias{aggregate}
 \title{aggregate}
 \usage{
-\method{aggregate}{smet}(x, date.field = "timestamp", FUN = mean,
-  INDEX = by[1], by = c("hourly", "daily", "monthly", "yearly"),
-  past = TRUE, ...)
+\method{aggregate}{smet}(
+  x,
+  date.field = "timestamp",
+  FUN = mean,
+  INDEX = by[1],
+  by = c("hourly", "daily", "monthly", "yearly"),
+  past = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{a \code{\link{smet-class}} object}

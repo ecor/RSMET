@@ -5,9 +5,16 @@
 \alias{[<-,extract_replacemethod}
 \title{\code{'[<-'} S3  Replacement method for \code{smet-class} object}
 \usage{
-\method{[}{smet}(x, rows = "all", fields = "all",
-  date.field = "timestamp", offset = 0, multiplier = 1,
-  nodata = -9999, ...) <- value
+\method{[}{smet}(
+  x,
+  rows = "all",
+  fields = "all",
+  date.field = "timestamp",
+  offset = 0,
+  multiplier = 1,
+  nodata = -9999,
+  ...
+) <- value
 }
 \arguments{
 \item{x}{a \code{\link{smet-class}} object}

@@ -4,9 +4,15 @@
 \alias{pushSmetIntoIni}
 \title{Pushes SMET object file into a \code{\link{meteoioini-class}} object}
 \usage{
-pushSmetIntoIni(..., smetlist = NULL, ini = as.meteoioini("test"),
+pushSmetIntoIni(
+  ...,
+  smetlist = NULL,
+  ini = as.meteoioini("test"),
   smetwdir = system.file("temp", package = "RSMET"),
-  force.smetdir = TRUE, new.ini.file = NA, append = FALSE)
+  force.smetdir = TRUE,
+  new.ini.file = NA,
+  append = FALSE
+)
 }
 \arguments{
 \item{...}{\code{\link{smet-class}} objects}

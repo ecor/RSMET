@@ -4,7 +4,9 @@
 \name{meteofrance}
 \alias{meteofrance}
 \title{Snow Weather Data in France}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 \url{https://donneespubliques.meteofrance.fr}(in pariticular \url{https://donneespubliques.meteofrance.fr/?fond=produit&id_produit=94&id_rubrique=32})
 }

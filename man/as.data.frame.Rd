@@ -5,8 +5,13 @@
 \alias{as.data.frame}
 \title{Coerces a \code{smet-class} object to a data frame}
 \usage{
-\method{as.data.frame}{smet}(x, ..., date.field = "timestamp",
-  add.header = FALSE, use.melt = FALSE)
+\method{as.data.frame}{smet}(
+  x,
+  ...,
+  date.field = "timestamp",
+  add.header = FALSE,
+  use.melt = FALSE
+)
 }
 \arguments{
 \item{x}{a \code{smet-class} object}
